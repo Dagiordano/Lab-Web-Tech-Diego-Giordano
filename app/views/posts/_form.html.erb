@@ -1,0 +1,63 @@
+
+
+<%= form_with model: post do |form| %>
+
+
+   <div>
+    <%= form.label :user_id %><br>
+    <%= form.text_field :user_id %>
+    <% @post.errors.full_messages_for(:user_id).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+
+  <div>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+    <% @post.errors.full_messages_for(:title).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  
+
+  <div>
+    <%= form.label :content %><br>
+    <%= form.text_area :content %>
+    <% @post.errors.full_messages_for(:content).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+
+  <div >
+    <%= form.label :published_at %><br>
+    <%= form.datetime_field :published_at %>
+  </div>
+
+
+  <div>
+    <%= form.label :answers_count %><br>
+    <%= form.text_field :answers_count %>
+    <% @post.errors.full_messages_for(:answers_count).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  
+ <div>
+    <%= form.label :likes_count %><br>
+    <%= form.text_field :likes_count %>
+    <% @post.errors.full_messages_for(:likes_count).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+
+
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
