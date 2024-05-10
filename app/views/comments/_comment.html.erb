@@ -1,4 +1,4 @@
-<p>
+<div class="m-4 border border-primary "> <p>
   <strong>Body:</strong>
   <%= comment.body %>
 </p>
@@ -6,4 +6,15 @@
 <p>
   <strong>User Id:</strong>
   <%= comment.user_id %>
-</p>
+</p> 
+</div>
+  
+
+
+<button type="button" class="btn btn-outline-info m-4"><%= link_to "Edit", edit_post_comment_path(comment.post, comment) %></button>
+
+
+
+
+
+<button type="button" class="btn btn-outline-secondary">  <%= link_to "Back to Posts", posts_path%>   </button>

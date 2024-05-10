@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-
+   
 
 
 
@@ -9,17 +9,23 @@ class CommentsController < ApplicationController
 
 
     def show
-        @comment = Comment.includes.find(params[:id])
+    
+        @comment = Comment.find(params[:id])
     
     end
 
 
     def new
-        @comment = Comment.new
+        
+        @comment = @post.comments.build
+        respond_to do |format| 
+            format.html 
+            format.js
+            end
     end
 
     def create
-        @post = Post.find(params[:post_id])
+       
         @comment = @post.comments.create(comment_params)
 
         flash[:message] = "The comment was created successfully"
@@ -28,18 +34,20 @@ class CommentsController < ApplicationController
 
 
     def edit
-        @comment = Comment.find(params[:id])
+        
+        @comment = @post.comments.find(params[:id])
     end
 
 
 
 
     def update
+        
         @comment = Comment.find(params[:id])
     
         if @comment.update(comment_params)
             flash[:message] = "The comment was updated successfully"
-          redirect_to @comment
+            redirect_to post_path(@comment.post)
         else
           render :edit, status: :unprocessable_entity
         end
@@ -62,6 +70,9 @@ class CommentsController < ApplicationController
 
     
     private
+
+ 
+
     def comment_params
         params.require(:comment).permit(:body, :user_id)
     end
