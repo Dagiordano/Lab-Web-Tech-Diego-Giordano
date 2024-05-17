@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  get '/comments', to: 'comments#index'
+
 
 
   get '/about', to: 'static_pages#about'

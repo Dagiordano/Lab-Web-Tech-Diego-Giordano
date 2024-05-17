@@ -1,4 +1,4 @@
-<%= form_with model: [ @post, comment ] do |form| %>
+<%= form_with(model: [ @post, @post.comments.build ], url: @post.new_record? ? posts_path : post_comments_path(@post)) do |form| %>
   <p>
     <%= form.label :body %><br>
     <%= form.text_field :body %>

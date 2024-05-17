@@ -16,16 +16,13 @@ class CommentsController < ApplicationController
 
 
     def new
-        
+        @post = Post.find(params[:post_id])
         @comment = @post.comments.build
-        respond_to do |format| 
-            format.html 
-            format.js
-            end
+        
     end
 
     def create
-       
+        @post = Post.find(params[:post_id])
         @comment = @post.comments.create(comment_params)
 
         flash[:message] = "The comment was created successfully"
@@ -34,7 +31,7 @@ class CommentsController < ApplicationController
 
 
     def edit
-        
+        @post = Post.find(params[:post_id])
         @comment = @post.comments.find(params[:id])
     end
 
@@ -54,17 +51,19 @@ class CommentsController < ApplicationController
         
     end
 
+    
+    # def destroy
+#     
+#     @comment = Comment.find(params[:id])
+#     if @comment.destroy
+#         flash[:message] = "The comment was deleted successfully"
+#         redirect_to root_path, status: :see_other
+#     else
+#         flash[:message] = "Error deleting comment"
+#         redirect_to root_path
+#     end
+# end
 
-    def destroy
-        @comment = Comment.find(params[:id])
-        if @comment.destroy
-            flash[:message] = "The comment was deleted successfully"
-            redirect_to root_path, status: :see_other
-        else
-            flash[:message] = "Error deliting comment"
-            redirect_to root_path
-            end
-    end
 
 
 

@@ -1,5 +1,11 @@
 class PostsController < ApplicationController
 
+
+  def new
+    @post = Post.new
+    
+  end
+
   def index
     @posts= Post.all
   end
@@ -9,15 +15,15 @@ class PostsController < ApplicationController
 
   end
 
-  def new
-    @post = Post.new
-  end
+ 
 
 
   def create
     @post = Post.new(post_params)
+    
 
     if @post.save
+      flash[:notice] = "Post created successfully"
       redirect_to @post
     else
       render :new, status: :unprocessable_entity
@@ -50,8 +56,9 @@ class PostsController < ApplicationController
 
   private 
   def post_params
-    params.require(:post).permit(:title, :content, :user_id, :published_at, :answers_count, :likes_count)
+    params.require(:post).permit(:title, :content, :user_id, :published_at, :answers_count, :likes_count, comments_attributes: [:body,:user_id])
   end
 
+  
 
 end
