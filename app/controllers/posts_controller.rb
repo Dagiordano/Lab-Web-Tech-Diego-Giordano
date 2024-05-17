@@ -20,7 +20,10 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    
+
+    if params[:post][:comments_attributes] && params[:post][:comments_attributes]["0"][:body].blank?
+      @post.comments = []  
+    end
 
     if @post.save
       flash[:notice] = "Post created successfully"
