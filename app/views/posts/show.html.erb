@@ -5,7 +5,7 @@
 
 
 
-<blockquote class="blockquote">
+<blockquote class="blockquote m-4">
           <p><%= @post.content %></p>
           <footer class="blockquote-footer"> <p><%= @post.user.name %></p>    <cite title="Source Title"></cite></footer>
         </blockquote>
@@ -19,8 +19,8 @@
     <%= tag.name %>
   <% end %>
 
-
-<h2>Comments</h2>
+<hr>
+<h2 class="m-4">Comments</h2>
 <%= render @post.comments%>
     
 
