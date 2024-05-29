@@ -32,6 +32,11 @@
 
   <button type="button" class="btn btn-outline-info mt-4"><%= link_to "Edit Post", edit_post_path(@post) %></button>
 
+  <%= link_to "Destroy", post_path(@post), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %>
+
   <button type="button" class="btn btn-outline-secondary mt-4">  <%= link_to "Back to Posts", posts_path%>   </button>
 </div>
 

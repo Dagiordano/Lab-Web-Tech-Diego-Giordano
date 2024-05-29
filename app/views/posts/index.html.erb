@@ -7,7 +7,7 @@
 
 <div class="row justify-content-center">
     <div class="col-auto">
-      <table class="table table-responsive">
+      <table class="table table-responsive table-bordered">
          <tr>
     <th>Id </th>
     <th>Title </th>
@@ -23,8 +23,7 @@
   </tr>
   <% end %>
       </table>
-
-    <button type="button" class="btn btn-outline-primary"><%= link_to "New Post", new_post_path %></button>  
+    <%= link_to "New Post", new_post_path, class:"btn btn-outline-primary" %>
     </div>
     
   </div>

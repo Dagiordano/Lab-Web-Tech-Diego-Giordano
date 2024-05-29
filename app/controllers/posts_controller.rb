@@ -39,6 +39,21 @@ class PostsController < ApplicationController
 
 
 
+  def destroy
+     
+    @post = Post.find(params[:id])
+    if @post.destroy
+        flash[:message] = "The post was deleted successfully"
+        redirect_to root_path, status: :see_other
+    else
+        flash[:message] = "Error deleting comment"
+        redirect_to root_path
+        end
+   end
+
+
+
+
   def update
     @post = Post.find(params[:id])
 

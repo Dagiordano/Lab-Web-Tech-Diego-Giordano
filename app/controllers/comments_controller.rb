@@ -52,17 +52,17 @@ class CommentsController < ApplicationController
     end
 
     
-    # def destroy
-#     
-#     @comment = Comment.find(params[:id])
-#     if @comment.destroy
-#         flash[:message] = "The comment was deleted successfully"
-#         redirect_to root_path, status: :see_other
-#     else
-#         flash[:message] = "Error deleting comment"
-#         redirect_to root_path
-#     end
-# end
+    def destroy
+     
+     @comment = Comment.find(params[:id])
+     if @comment.destroy
+         flash[:message] = "The comment was deleted successfully"
+         redirect_to root_path, status: :see_other
+     else
+         flash[:message] = "Error deleting comment"
+         redirect_to root_path
+         end
+    end
 
 
 
