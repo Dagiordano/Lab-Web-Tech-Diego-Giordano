@@ -11,15 +11,17 @@
 </div>
   
 
-
-<button type="button" class="btn btn-outline-info m-4"><%= link_to "Edit comment", edit_post_comment_path(comment.post, comment) %></button>
+<% if user_signed_in? %>
+            <button type="button" class="btn btn-outline-info m-4"><%= link_to "Edit comment", edit_post_comment_path(comment.post, comment) %></button>
 
 <%= link_to "Destroy", post_comment_path(comment.post,comment), data: {
                     turbo_method: :delete,
                     turbo_confirm: "Are you sure?"
                   } %>
+          <% else %>
+            
+          <% end %>
 
 
 
 
-<button type="button" class="btn btn-outline-secondary ">  <%= link_to "Back to Posts", posts_path%>   </button>

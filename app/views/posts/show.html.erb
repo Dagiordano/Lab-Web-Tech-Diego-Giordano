@@ -26,7 +26,8 @@
 
 
 <div class="container">
-  <button type="button" class="btn btn-outline-info mt-4"> <%= link_to "Add Comment", new_post_comment_path(@post) %> </button>
+  <% if user_signed_in? %>
+            <button type="button" class="btn btn-outline-info mt-4"> <%= link_to "Add Comment", new_post_comment_path(@post) %> </button>
 
 
   <% if user_signed_in? && current_user == @post.user %>
@@ -37,6 +38,14 @@
                     turbo_confirm: "Are you sure?"
                   } %>
 <% end %>
+          <% else %>
+            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+          <% end %>
+
+
+
+  
+  
   
 
   <button type="button" class="btn btn-outline-secondary mt-4">  <%= link_to "Back to Posts", posts_path%>   </button>

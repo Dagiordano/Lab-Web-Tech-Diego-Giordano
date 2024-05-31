@@ -20,13 +20,13 @@ User.destroy_all
 
 User.create!(name: "John Doe",
 email: "juancho@gmail.com",
-password: "juancho1234")
+password: "password")
 
 4.times do
 	User.create(
 	name: Faker::JapaneseMedia::FullmetalAlchemistBrotherhood.character,
 	email: Faker::Internet.email(domain: 'gmail.com'),
-	password: Faker::Internet.password(min_length: 8)
+	password: "password"
 	)
 
 end
