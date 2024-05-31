@@ -7,4 +7,5 @@ class User < ApplicationRecord
     validates :email, format: {with: /\A(.+)@(.+)\z/, message: "Email invalid"}, uniqueness: true
     validates :password, length: {minimum: 6}
     has_many :posts
+    has_many :comments
 end

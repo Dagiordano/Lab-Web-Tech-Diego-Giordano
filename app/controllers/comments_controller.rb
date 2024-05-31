@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-   
+    before_action :authenticate_user!, except: [:index, :show]
 
 
 
@@ -23,7 +23,8 @@ class CommentsController < ApplicationController
 
     def create
         @post = Post.find(params[:post_id])
-        @comment = @post.comments.create(comment_params)
+        @comment = @post.comments.build(comment_params.merge(user: current_user)) # Associate the comment with the current user
+
 
         flash[:message] = "The comment was created successfully"
         redirect_to post_path(@post)

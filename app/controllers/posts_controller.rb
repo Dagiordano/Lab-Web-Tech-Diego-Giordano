@@ -19,7 +19,7 @@ before_action :authenticate_user!, except: [:index, :show]
 
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
 
     if params[:post][:comments_attributes] && params[:post][:comments_attributes]["0"][:body].blank?
       @post.comments = []  
@@ -74,7 +74,7 @@ before_action :authenticate_user!, except: [:index, :show]
 
   private 
   def post_params
-    params.require(:post).permit(:title, :content, :user_id, :published_at, :answers_count, :likes_count, comments_attributes: [:body,:user_id])
+    params.require(:post).permit(:title, :content, :published_at, :answers_count, :likes_count, comments_attributes: [:body, :user_id])
   end
 
   
