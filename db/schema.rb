@@ -27,12 +27,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_175126) do
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "content"
-    t.integer "user_id"
+    t.bigint "user_id", null: false
     t.datetime "published_at"
     t.integer "answers_count"
     t.integer "likes_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "posts_tags", id: false, force: :cascade do |t|
@@ -61,4 +62,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_175126) do
 
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "posts", "users"
 end

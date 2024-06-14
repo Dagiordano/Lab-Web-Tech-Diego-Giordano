@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
     before_action :authenticate_user!, except: [:index, :show]
+    before_action :set_post
+    before_action :set_comment, only: [:show, :edit,:update ,:destroy]
     before_action :authorize_user!, only: [:edit, :update, :destroy]
-
 
 
     def index
@@ -12,18 +13,17 @@ class CommentsController < ApplicationController
     def show
     
         @comment = Comment.find(params[:id])
+
     
     end
 
 
     def new
-        @post = Post.find(params[:post_id])
         @comment = @post.comments.build
         
     end
 
     def create
-        @post = Post.find(params[:post_id])
         
         @comment = @post.comments.build(comment_params)
         @comment.user = current_user
@@ -40,38 +40,36 @@ class CommentsController < ApplicationController
 
 
     def edit
-        @post = Post.find(params[:post_id])
-        @comment = @post.comments.find(params[:id])
+        
     end
 
 
 
 
     def update
-        
-        @comment = Comment.find(params[:id])
-    
-        if @comment.update(comment_params)
-            flash[:message] = "The comment was updated successfully"
-            redirect_to post_path(@comment.post)
+      @post = Post.find(params[:post_id])
+      @comment = Comment.find(params[:id])
+      if @comment.update(comment_params)
+          flash[:notice] = "The comment was updated successfully"
+          redirect_to post_path(@post)
         else
+          flash[:alert] = "There was an error updating the comment"
           render :edit, status: :unprocessable_entity
         end
-        
-    end
+      
+      
+  end
 
     
     def destroy
-     
-     @comment = Comment.find(params[:id])
-     if @comment.destroy
-         flash[:message] = "The comment was deleted successfully"
-         redirect_to root_path, status: :see_other
-     else
-         flash[:message] = "Error deleting comment"
-         redirect_to root_path
-         end
-    end
+        if @comment.destroy
+          flash[:notice] = "The comment was deleted successfully"
+          redirect_to post_path(@post), status: :see_other
+        else
+          flash[:alert] = "Error deleting comment"
+          redirect_to post_path(@post)
+        end
+      end
 
 
 
@@ -79,15 +77,22 @@ class CommentsController < ApplicationController
     
     private
 
+
+    
+    
+    def set_comment
+      @comment = Comment.find(params[:id])
+    end
+
     def set_post
         @post = Post.find(params[:post_id])
     end
 
     def authorize_user!
-        @post = Post.find(params[:id])
-        unless current_user == @post.user
-          redirect_to posts_path, alert: 'You are not authorized to perform this action.'
-        end
+      @comment = Comment.find(params[:id]) 
+      unless current_user == @comment.user
+        redirect_to posts_path, alert: 'You are not authorized to perform this action.'
+      end
     end
 
 

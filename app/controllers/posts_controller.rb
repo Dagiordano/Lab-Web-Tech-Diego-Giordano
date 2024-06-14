@@ -54,14 +54,15 @@ before_action :authenticate_user!, except: [:index, :show]
 
 
 
-  def update
+   def update
     @post = Post.find(params[:id])
-
     if @post.update(post_params)
+      flash[:notice] = "Post updated successfully"
       redirect_to @post
     else
       render :edit, status: :unprocessable_entity
     end
+    
     
   end
 
